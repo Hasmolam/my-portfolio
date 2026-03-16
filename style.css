@@ -1167,6 +1167,42 @@ section {
     opacity: 0.5;
 }
 
+.form-status {
+    margin-top: 14px;
+    min-height: 18px;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--green3);
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.form-status.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.form-status::before {
+    content: '> ';
+    color: var(--cyan);
+}
+
+.form-status.is-sending {
+    color: var(--cyan);
+    text-shadow: var(--glow-cyan);
+}
+
+.form-status.is-success {
+    color: var(--green);
+    text-shadow: var(--glow-sm);
+}
+
+.form-status.is-error {
+    color: var(--red);
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+}
+
 /* FOOTER */
 footer {
     border-top: 1px solid var(--green3);

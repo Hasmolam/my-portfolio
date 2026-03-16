@@ -445,6 +445,7 @@
                 ./send_message.sh
               </button>
             </div>
+            <div class="form-status" id="contact-status" aria-live="polite"></div>
           </form>
         </div>
       </div>
@@ -624,6 +625,47 @@ function setSubmitState(btn, text, isSending) {
 const contactForm = document.getElementById('contact-form');
 const contactSubmit = document.getElementById('contact-submit');
 const contactReplyTo = document.getElementById('contact-replyto');
+const contactStatus = document.getElementById('contact-status');
+let statusInterval = null;
+
+function setFormStatus(text, state, withDots = false) {
+  if (!contactStatus) return;
+  contactStatus.className = 'form-status visible';
+  if (state) contactStatus.classList.add(state);
+
+  if (statusInterval) {
+    clearInterval(statusInterval);
+    statusInterval = null;
+  }
+
+  if (!withDots) {
+    contactStatus.textContent = text;
+    return;
+  }
+
+  let dots = 0;
+  contactStatus.textContent = text;
+  statusInterval = setInterval(() => {
+    dots = (dots + 1) % 4;
+    contactStatus.textContent = text + '.'.repeat(dots);
+  }, 350);
+}
+
+function clearFormStatus(delay = 0) {
+  const clearNow = () => {
+    if (!contactStatus) return;
+    contactStatus.className = 'form-status';
+    contactStatus.textContent = '';
+  };
+
+  if (statusInterval) {
+    clearInterval(statusInterval);
+    statusInterval = null;
+  }
+
+  if (delay) setTimeout(clearNow, delay);
+  else clearNow();
+}
 
 if (contactForm && contactSubmit) {
   contactForm.addEventListener('submit', async event => {
@@ -635,12 +677,15 @@ if (contactForm && contactSubmit) {
 
     if (!name || !email || !message) {
       setSubmitState(contactSubmit, '> LUTFEN TUM ALANLARI DOLDUR', false);
+      setFormStatus('LUTFEN TUM ALANLARI DOLDUR', 'is-error');
       setTimeout(() => setSubmitState(contactSubmit, './send_message.sh', false), 2200);
+      clearFormStatus(2200);
       return;
     }
 
     if (contactReplyTo) contactReplyTo.value = email;
     setSubmitState(contactSubmit, '> SENDING...', true);
+    setFormStatus('ILETILIYOR', 'is-sending', true);
 
     try {
       const response = await fetch(contactForm.action, {
@@ -654,17 +699,20 @@ if (contactForm && contactSubmit) {
       if (!response.ok) throw new Error('Formspree error');
 
       setSubmitState(contactSubmit, '> ✓ MESAJ GONDERILDI', false);
+      setFormStatus('MESAJ GONDERILDI', 'is-success');
       contactSubmit.style.borderColor = 'var(--cyan)';
       contactSubmit.style.color = 'var(--cyan)';
       contactForm.reset();
     } catch (err) {
       setSubmitState(contactSubmit, '> HATA OLUSTU, TEKRAR DENE', false);
+      setFormStatus('HATA OLUSTU, TEKRAR DENE', 'is-error');
     } finally {
       setTimeout(() => {
         setSubmitState(contactSubmit, './send_message.sh', false);
         contactSubmit.style.borderColor = '';
         contactSubmit.style.color = '';
       }, 2500);
+      clearFormStatus(2500);
     }
   });
 }
