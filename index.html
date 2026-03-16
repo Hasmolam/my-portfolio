@@ -425,7 +425,7 @@
             <div class="t-dot green"></div>
             <span class="terminal-title">~ new_message.sh</span>
           </div>
-          <form class="terminal-body" style="padding:28px" id="contact-form" novalidate>
+          <form class="terminal-body" style="padding:28px" id="contact-form" action="https://formspree.io/f/mqeyyyaj" method="POST" novalidate>
             <div class="form-group">
               <label class="form-label" for="contact-name">$ --name</label>
               <input class="form-input" id="contact-name" name="name" type="text" placeholder="John Doe" required />
@@ -438,6 +438,8 @@
               <label class="form-label" for="contact-message">$ --message</label>
               <textarea class="form-textarea" id="contact-message" name="message" placeholder="Merhaba Hasan..." required></textarea>
             </div>
+            <input type="hidden" name="_subject" value="Yeni Mesaj - Portfolio" />
+            <input type="hidden" name="_replyto" id="contact-replyto" />
             <div style="margin-top:20px">
               <button class="btn btn-primary" id="contact-submit" type="submit" style="width:100%;cursor:none;">
                 ./send_message.sh
@@ -612,26 +614,19 @@ function triggerGlitch() {
 setInterval(triggerGlitch, 5000);
 
 // ============================================
-// CONTACT FORM
+// CONTACT FORM (FORMSPREE)
 // ============================================
 function setSubmitState(btn, text, isSending) {
   btn.textContent = text;
   btn.style.opacity = isSending ? '0.7' : '1';
 }
 
-function buildMailto({ name, email, message }) {
-  const subject = encodeURIComponent('Yeni Mesaj - Portfolio');
-  const body = encodeURIComponent(
-    `İsim: ${name}\nE-posta: ${email}\n\nMesaj:\n${message}`
-  );
-  return `mailto:hasanhuseyinyolcu25@email.com?subject=${subject}&body=${body}`;
-}
-
 const contactForm = document.getElementById('contact-form');
 const contactSubmit = document.getElementById('contact-submit');
+const contactReplyTo = document.getElementById('contact-replyto');
 
 if (contactForm && contactSubmit) {
-  contactForm.addEventListener('submit', event => {
+  contactForm.addEventListener('submit', async event => {
     event.preventDefault();
 
     const name = document.getElementById('contact-name').value.trim();
@@ -644,23 +639,33 @@ if (contactForm && contactSubmit) {
       return;
     }
 
+    if (contactReplyTo) contactReplyTo.value = email;
     setSubmitState(contactSubmit, '> SENDING...', true);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (!response.ok) throw new Error('Formspree error');
+
       setSubmitState(contactSubmit, '> ✓ MESAJ GONDERILDI', false);
       contactSubmit.style.borderColor = 'var(--cyan)';
       contactSubmit.style.color = 'var(--cyan)';
-
-      window.location.href = buildMailto({ name, email, message });
-
       contactForm.reset();
-
+    } catch (err) {
+      setSubmitState(contactSubmit, '> HATA OLUSTU, TEKRAR DENE', false);
+    } finally {
       setTimeout(() => {
         setSubmitState(contactSubmit, './send_message.sh', false);
         contactSubmit.style.borderColor = '';
         contactSubmit.style.color = '';
       }, 2500);
-    }, 600);
+    }
   });
 }
 
