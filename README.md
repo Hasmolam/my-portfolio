@@ -1,32 +1,36 @@
-#!/ HHY // Hasan Huseyin Yolcu
+#!/ HHY // Hasan Hüseyin Yolcu
 
-Bu repo, benim kişisel portfolyo sitemi icerir. Backend gelistirme odakli bir yazilim gelistiricisiyim ve bu sayfada uzmanlik alanlarim, projelerim ve iletisim bilgilerim yer alir.
+Bu repo kişisel portfolyo sitemi içerir → **[hasanhuseyinyolcu.me](https://hasanhuseyinyolcu.me)**
 
-## Hakkimda
-- Backend Developer, Izmir
-- Modern, guvenli ve yuksek performansli backend cozumleri gelistiriyorum
-- Laravel, FastAPI ve NestJS ile API ve mikroservis tasarimi
+Full-stack geliştiriciyim; müşteriler için canlıya çıkan web uygulamaları geliştiriyorum.
+
+## Hakkımda
+- Full-Stack Developer, İzmir
+- Laravel + Filament ile yönetim panelleri ve kurumsal platformlar
+- Next.js + Sanity ile içerik odaklı, hızlı siteler
+- Tasarımdan veritabanına, kimlik doğrulamadan sunucu kurulumuna kadar tüm süreç
 
 ## Teknoloji ve Yetkinlikler
-- Backend Frameworks: Laravel, FastAPI, NestJS
-- Diller: Python, PHP, JavaScript
-- Araclar/Altyapi: Linux, Git, Docker, PostgreSQL, Redis, DigitalOcean
+- **Arka uç:** Laravel, Filament, FastAPI, Flask
+- **Ön yüz:** Next.js, React, React Native, Tailwind CSS
+- **CMS:** Sanity, WordPress (Elementor)
+- **Diller:** TypeScript, PHP, Python, JavaScript
+- **Araçlar/Altyapı:** Linux, Git, Docker, MySQL, PostgreSQL
 
-## Projelerden Ornekler
-- Afetar: Afet aninda yardim ihtiyaci olan kisilerle gonulluleri eslestiren mobil uygulama
-- English Quiz App: FastAPI tabanli modern Ingilizce ogrenme uygulamasi
-- Ege Genc Basketbol Spor Kulubu: Laravel 12 + Filament 5 ile gelistirilmis yonetim platformu
-- Flask Task Manager API: JWT tabanli kimlik dogrulama ve gorev yonetimi sunan RESTful API
+## Canlı Projeler
+- **[Ege Genç Basketbol Spor Kulübü](https://egegencbasketbol.com/)** — Laravel 12 + Filament 5 ile kulüp yönetim platformu ve kurumsal site
+- **[Hayyam Meyhanesi](https://hayyammeyhanesi.com/)** — Next.js 16 + Sanity CMS ile içerik yönetimli kurumsal site
+- **[288 Pub & Kitchen](https://288pub.com/)** — Mevcut WordPress kurulumunun arayüz tasarımının baştan sona yenilenmesi (Elementor)
 
-## Iletisim
+## Kişisel Projeler
+- **[English Quiz App](https://github.com/Hasmolam/English-Quiz-App)** — React Native (Expo) + FastAPI ile oyunlaştırılmış dil öğrenme uygulaması
+- **[Pekiştirmeli Öğrenme Türkçe Notlar](https://hasmolam.github.io/rl-turkce-notlar/)** — 20 bölümlük özgün Türkçe çalışma notları ve web okuyucusu
+- **[Afetar](https://github.com/Hasmolam/afetar)** / **[CanSuyu](https://github.com/Hasmolam/cansuyu)** — Afet anında yardım-gönüllü eşleştirme platformları
+
+## Teknik Not
+Statik HTML/CSS ile yazıldı, GitHub Pages üzerinde özel alan adıyla yayında.
+
+## İletişim
 - E-posta: hasanhuseyinyolcu25@gmail.com
-- GitHub: https://github.com/hasmolam
-- LinkedIn: https://www.linkedin.com/in/hasan-huseyin-yolcu/
-
-## Calistirma
-Bu proje statik bir portfolyo sitesidir. Dogrudan tarayicida acabilirsiniz:
-- index.html dosyasini ac
-Isterseniz basit bir yerel sunucu da kullanabilirsiniz.
-
-## Not
-Iletisim formu Formspree uzerinden calisir.
+- LinkedIn: [hasan-huseyin-yolcu](https://www.linkedin.com/in/hasan-huseyin-yolcu/)
+- GitHub: [@Hasmolam](https://github.com/Hasmolam)
